@@ -1,0 +1,79 @@
+ #include<iostream>
+#include <string>
+
+using namespace std;
+
+class Account {
+private:
+    string owner;
+    double balance;
+
+public:
+    Account(string name, double start_balance) {
+        owner = name;
+        balance = start_balance;
+    }
+
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            cout << "Deposited " << amount << " EGP. New balance: " << balance << " EGP" << endl;
+        } else {
+            cout << "Error: invalid amount." << endl;
+        }
+    }
+
+    void withdraw(double amount) {
+        if (amount > balance) {
+            cout << "Error: insufficient funds. Current balance: " << balance << " EGP" << endl;
+        } else if (amount <= 0) {
+            cout << "Error: invalid amount." << endl;
+        } else {
+            balance -= amount;
+            cout << "Withdrawn " << amount << " EGP. New balance: " << balance << " EGP" << endl;
+        }
+    }
+
+    void checkBalance() {
+        cout << "Current balance: " << balance << " EGP" << endl;
+    }
+};
+
+int main() {
+    Account myAcc("Yousef", 0);
+    int opt;
+    double money;
+
+    while (true) {
+        cout << "\n=== Bank System ===" << endl;
+        cout << "1. Deposit" << endl;
+        cout << "2. Withdraw" << endl;
+        cout << "3. Check Balance" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Choose an option: ";
+        cin >> opt;
+
+        if (opt == 1) {
+            cout << "Enter amount to deposit: ";
+            cin >> money;
+            myAcc.deposit(money);
+        } 
+        else if (opt == 2) {
+            cout << "Enter amount to withdraw: ";
+            cin >> money;
+            myAcc.withdraw(money);
+        } 
+        else if (opt == 3) {
+            myAcc.checkBalance();
+        } 
+        else if (opt == 4) {
+            cout << "Goodbye!" << endl;
+            break;
+        } 
+        else {
+            cout << "Wrong option, try again!" << endl;
+        }
+    }
+
+    return 0;
+}
